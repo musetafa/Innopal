@@ -1,8 +1,17 @@
 import { motion } from "motion/react";
 
 export default function GraphicSection() {
+  const stats = [
+    { label: "Workshops d’Idéation Gamifiés", value: "200+" },
+    { label: "Entreprises accompagnées", value: "50+" },
+    { label: "Programmes Open Innovation", value: "15+" },
+    { label: "Projets Politique d’Innovation", value: "10+" },
+    { label: "Programmes d’incubation et d’accélération", value: "5+" },
+    { label: "Startups accompagnées", value: "100+" },
+  ];
+
   return (
-    <section id="graphic" className="py-32 relative overflow-hidden">
+    <section id="studio-plus" className="py-32 relative bg-white/[0.02]">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -11,52 +20,68 @@ export default function GraphicSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
+          <p className="text-xs md:text-sm uppercase tracking-[0.25em] text-white/40 font-medium mb-4">
+            Notre proposition de valeur
+          </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Vision <span className="text-gradient-accent">Architecturale</span>
+            EY Studio+ <span className="text-[var(--color-accent)]">Tunisie</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Une représentation visuelle de l'écosystème IA que nous allons
-            construire ensemble. Des fondations de données jusqu'aux interfaces
-            utilisateurs intelligentes.
+          <p className="text-white/80 text-xl md:text-2xl font-medium max-w-3xl mx-auto mb-8">
+            "Nous ne conseillons pas l’écosystème, nous en faisons partie."
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1 }}
-          className="relative w-full aspect-video rounded-3xl border border-white/10 bg-[#0a0a0a] overflow-hidden flex items-center justify-center"
-        >
-          {/* 3D Graphic Placeholder */}
-          <div className="absolute inset-0 opacity-20">
-            {/* Grid background */}
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-                transform:
-                  "perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px)",
-              }}
-            />
-          </div>
-
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="w-32 h-32 mb-8 relative">
-              <div className="absolute inset-0 border-2 border-[var(--color-accent)] rounded-lg transform rotate-45 animate-[spin_10s_linear_infinite]" />
-              <div className="absolute inset-2 border-2 border-white/50 rounded-lg transform -rotate-12 animate-[spin_15s_linear_infinite_reverse]" />
-              <div className="absolute inset-4 bg-[var(--color-accent)]/20 backdrop-blur-sm rounded-lg" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6 text-white/60 text-lg leading-relaxed"
+          >
+            <p>
+              <strong className="text-white">EY Studio+</strong> est l’entité de EY dédiée à la conception de services, à l’innovation et à l’expérience client.
+            </p>
+            <p>
+              Elle combine design, technologie et stratégie pour aider les organisations à imaginer, tester et déployer des solutions innovantes centrées sur l’utilisateur.
+            </p>
+            <p>
+              EY Studio+ accompagne les entreprises dans la création de nouveaux produits, services et parcours digitaux, en utilisant des approches telles que le Design Thinking, le prototypage rapide et l’expérimentation.
+            </p>
+            <div className="pt-6 border-t border-white/10">
+              <p className="text-white/80 italic font-medium">
+                "Nous ne sommes pas au-dessus, ni en dehors. Nous sommes au cœur du mouvement."
+              </p>
             </div>
-            <div className="font-mono text-sm text-white/40 tracking-[0.3em] uppercase">
-              [ 3D Animated Graphic ]
-            </div>
-          </div>
+          </motion.div>
 
-          {/* Glow effects */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--color-accent)]/10 blur-[100px] rounded-full pointer-events-none" />
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="grid grid-cols-2 gap-6"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-panel p-6 rounded-2xl border border-white/5 hover:border-[var(--color-accent)]/30 transition-colors"
+              >
+                {/* Visual placeholder for the stat number, since exact numbers aren't in the slide but it's a KPI block */}
+                <div className="text-3xl font-display font-bold text-[var(--color-accent)] mb-2">
+                  ✓
+                </div>
+                <div className="text-sm text-white/80 leading-snug">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

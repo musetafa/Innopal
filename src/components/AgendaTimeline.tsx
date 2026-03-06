@@ -8,13 +8,32 @@ import {
   Zap,
   CheckCircle2,
   Image as ImageIcon,
+  Coffee,
+  Utensils,
 } from "lucide-react";
 import { agendaData, Activity } from "../data/agenda";
+
+function getPhaseColor(phase: string) {
+  if (phase.toLowerCase().includes("ouverture")) {
+    return "text-amber-400";
+  }
+  if (phase.toLowerCase().includes("opportunités")) {
+    return "text-emerald-400";
+  }
+  if (phase.toLowerCase().includes("orientations")) {
+    return "text-fuchsia-400";
+  }
+  if (phase.toLowerCase().includes("implémentation")) {
+    return "text-indigo-400";
+  }
+  return "text-white";
+}
 
 export default function AgendaTimeline() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
-  const toggleExpand = (id: string) => {
+  const toggleExpand = (id: string, hasDetails: boolean) => {
+    if (!hasDetails) return;
     setExpandedId(expandedId === id ? null : id);
   };
 
@@ -29,7 +48,7 @@ export default function AgendaTimeline() {
           className="mb-24 text-center"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Agenda <span className="text-gradient-accent">Détaillé</span>
+            Agenda <span className="text-white">Détaillé</span>
           </h2>
           <p className="text-white/60 text-lg">
             Un programme intensif sur 2 jours
@@ -49,11 +68,10 @@ export default function AgendaTimeline() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="sticky top-24 z-20 flex flex-col items-center mb-16"
               >
-                <div className="bg-[var(--color-bg)] px-6 py-3 rounded-full border border-[var(--color-accent)]/30 text-[var(--color-accent)] font-bold tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(0,240,255,0.1)]">
-                  {day.title}
-                </div>
-                <div className="text-white/40 text-sm mt-2 font-mono">
-                  {day.date}
+                <div className="bg-[var(--color-bg)] px-6 py-3 rounded-full border border-white/30 text-white font-bold tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center gap-3">
+                  <span>{day.title}</span>
+                  <span className="w-1 h-1 bg-white/50 rounded-full" />
+                  <span className="text-white/70 font-mono font-normal tracking-normal lowercase">{day.date}</span>
                 </div>
               </motion.div>
 
@@ -62,6 +80,13 @@ export default function AgendaTimeline() {
                 {day.activities.map((activity, actIndex) => {
                   const isExpanded = expandedId === activity.id;
                   const isEven = actIndex % 2 === 0;
+                  const isPause = activity.name.toLowerCase().includes("pause");
+                  const hasDetails = !isPause && Boolean(
+                    activity.description ||
+                    activity.keyActivities.length > 0 ||
+                    activity.results.length > 0 ||
+                    activity.impacts.length > 0
+                  );
 
                   return (
                     <motion.div
@@ -75,40 +100,56 @@ export default function AgendaTimeline() {
                       }`}
                     >
                       {/* Timeline Node */}
-                      <div className="absolute left-[28px] md:left-1/2 w-4 h-4 rounded-full bg-[var(--color-bg)] border-2 border-[var(--color-accent)] -translate-x-1/2 mt-6 z-10 shadow-[0_0_15px_rgba(0,240,255,0.5)]" />
+                      <div className="absolute left-[28px] md:left-1/2 w-4 h-4 rounded-full bg-[var(--color-bg)] border-2 border-white -translate-x-1/2 mt-6 z-10 shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
 
                       {/* Content Card */}
                       <div
                         className={`w-full md:w-1/2 pl-16 md:pl-0 ${isEven ? "md:pr-16" : "md:pl-16"}`}
                       >
                         <div
-                          onClick={() => toggleExpand(activity.id)}
-                          className={`glass-panel rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:border-[var(--color-accent)]/50 ${
+                          onClick={() => toggleExpand(activity.id, hasDetails)}
+                          className={`glass-panel rounded-2xl p-6 transition-all duration-300 ${
+                            hasDetails ? "cursor-pointer hover:border-white/50" : ""
+                          } ${
                             isExpanded
-                              ? "border-[var(--color-accent)] bg-white/[0.05]"
+                              ? "border-white bg-white/[0.05]"
                               : "border-white/10"
                           }`}
                         >
-                          <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-start justify-between">
                             <div>
-                              <div className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] mb-2 font-mono">
-                                {activity.phase}
+                              {!activity.name.toLowerCase().includes("pause") && (
+                                <div className={`text-[13px] uppercase tracking-widest mb-2 font-mono ${getPhaseColor(activity.phase)}`}>
+                                  {activity.phase}
+                                </div>
+                              )}
+                              <div className="flex items-center">
+                                {activity.name.toLowerCase() === "pause" && (
+                                  <Coffee size={20} className="mr-3 text-white/40" />
+                                )}
+                                {activity.name.toLowerCase().includes("déjeuner") && (
+                                  <Utensils size={20} className="mr-3 text-white/40" />
+                                )}
+                                <h4 className="text-xl font-bold text-white">
+                                  {activity.name}
+                                </h4>
                               </div>
-                              <h4 className="text-xl font-bold text-white mb-2">
-                                {activity.name}
-                              </h4>
-                              <div className="flex items-center text-white/50 text-sm font-mono">
-                                <Clock size={14} className="mr-2" />
-                                {activity.duration}
-                              </div>
-                            </div>
-                            <div className="text-white/30">
-                              {isExpanded ? (
-                                <ChevronUp size={20} />
-                              ) : (
-                                <ChevronDown size={20} />
+                              {activity.duration && (
+                                <div className="flex items-center text-white/50 text-sm font-mono mt-1">
+                                  <Clock size={14} className="mr-2" />
+                                  {activity.duration}
+                                </div>
                               )}
                             </div>
+                            {hasDetails && (
+                              <div className="text-white/30">
+                                {isExpanded ? (
+                                  <ChevronUp size={20} />
+                                ) : (
+                                  <ChevronDown size={20} />
+                                )}
+                              </div>
+                            )}
                           </div>
 
                           <AnimatePresence>
@@ -133,7 +174,7 @@ export default function AgendaTimeline() {
                                       <h5 className="flex items-center text-sm font-bold text-white mb-3 uppercase tracking-wider">
                                         <Zap
                                           size={16}
-                                          className="mr-2 text-[var(--color-accent)]"
+                                          className="mr-2 text-white"
                                         />
                                         Activités clés
                                       </h5>
@@ -144,7 +185,7 @@ export default function AgendaTimeline() {
                                               key={i}
                                               className="flex items-start text-sm text-white/60"
                                             >
-                                              <span className="mr-2 text-[var(--color-accent)] mt-1">
+                                              <span className="mr-2 text-white mt-1">
                                                 •
                                               </span>
                                               {item}
@@ -203,16 +244,23 @@ export default function AgendaTimeline() {
                                     </div>
                                   </div>
 
-                                  {/* Image Placeholder */}
-                                  <div className="w-full h-32 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center mt-6 group overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <div className="flex flex-col items-center text-white/20 group-hover:text-white/40 transition-colors">
-                                      <ImageIcon size={24} className="mb-2" />
-                                      <span className="text-xs font-mono uppercase tracking-widest">
-                                        [ Image Placeholder ]
-                                      </span>
+                                  {/* Actual Images (if any) */}
+                                  {activity.images && activity.images.length > 0 && (
+                                    <div className="flex flex-col items-center gap-6 mt-8 w-full justify-center">
+                                      {activity.images.map((imgSrc, i) => (
+                                        <div
+                                          key={imgSrc}
+                                          className="relative rounded-xl overflow-hidden border border-white/10 shadow-xl transition-transform duration-500 hover:scale-[1.02] w-full"
+                                        >
+                                          <img
+                                            src={`../../Assets/Agenda/${imgSrc}`}
+                                            alt={`${activity.name} preview ${i + 1}`}
+                                            className="w-full h-auto object-contain rounded-xl"
+                                          />
+                                        </div>
+                                      ))}
                                     </div>
-                                  </div>
+                                  )}
                                 </div>
                               </motion.div>
                             )}

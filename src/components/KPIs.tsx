@@ -1,11 +1,11 @@
 import { motion } from "motion/react";
+import TunisiaMap from "./TunisiaMap";
 
 export default function KPIs() {
   const kpis = [
-    { value: "50+", label: "Experts IA Mobilisés" },
-    { value: "12", label: "Cas d'usage identifiés" },
-    { value: "3", label: "Prototypes livrés" },
-    { value: "100%", label: "Engagement garanti" },
+    { value: "11", label: "Secteurs d’activité" },
+    { value: "20", label: "Associés" },
+    { value: "750+", label: "Professionnels" },
   ];
 
   return (
@@ -22,18 +22,56 @@ export default function KPIs() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Impact & <br />
-              <span className="text-gradient-accent">Couverture</span>
-            </h2>
-            <p className="text-white/60 text-lg mb-12 leading-relaxed">
-              Notre approche est conçue pour maximiser l'impact sur l'ensemble
-              de votre territoire d'opération. De la conception à l'exécution,
-              nous mesurons chaque étape pour garantir un retour sur
-              investissement tangible.
-            </p>
+            <div className="mb-6">
+              <p className="text-xs md:text-sm uppercase tracking-[0.25em] text-white/40 font-medium">
+                Notre proposition de valeur
+              </p>
+              <p className="mt-2 text-lg md:text-xl font-semibold text-white/60">
+                EY Tunisie
+              </p>
+              <h2 className="mt-3 text-4xl md:text-5xl font-bold leading-tight text-white">
+                Un acteur de référence au cœur des transformations économiques et
+                entrepreneuriales.
+              </h2>
+            </div>
+            <div className="text-white/60 text-lg mb-12 leading-relaxed space-y-6">
+              <p>
+                Présente localement depuis 1987, AMC EY Tunisie est l’une des
+                premières sociétés de services professionnels en Tunisie,
+                s’appuyant sur plus de 750 professionnels basés à Tunis.
+              </p>
+              <p>
+                EY Tunisie soutient les éditeurs de logiciels et les acteurs des
+                services financiers dans le développement, l’évolution et la
+                gouvernance de leurs plateformes technologiques, en Tunisie et
+                en Afrique subsaharienne francophone.
+              </p>
+              <p>
+                Nous disposons d’une connaissance approfondie et opérationnelle
+                dans l’édition de solutions destinées au secteur financier,
+                portée par des experts dédiés et appuyée par des références
+                solides issues de projets de transformation d’envergure menés
+                avec les principaux acteurs du secteur.
+              </p>
+              <p>
+                Plus de 500 missions sont réalisées chaque année, auprès de plus
+                de 200 clients locaux, couvrant les acteurs clés du marché.
+              </p>
+              <p>
+                Nos références couvrent les principaux enjeux de l’édition
+                logicielle financière : performance, digitalisation, UX, data,
+                conformité et technologies.
+              </p>
+              <p>
+                Ces références ont permis de construire une expertise reconnue,
+                nourrie par une compréhension fine des réalités terrain propres
+                à l’édition de solutions pour le secteur financier, et orientée
+                vers la résolution de problématiques business concrètes et à
+                fort impact.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               {kpis.map((kpi, index) => (
                 <motion.div
                   key={index}
@@ -41,8 +79,9 @@ export default function KPIs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="border-l-2 border-[var(--color-accent)] pl-4"
+                  className="relative pl-4"
                 >
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#FFE600] via-[#FF32FF] to-[#32FFFF]" />
                   <div className="text-4xl font-display font-bold text-white mb-1">
                     {kpi.value}
                   </div>
@@ -60,39 +99,13 @@ export default function KPIs() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
-            className="relative h-[500px] rounded-3xl glass-panel flex items-center justify-center overflow-hidden group"
+            className="relative h-full min-h-[500px] rounded-3xl glass-panel flex items-center justify-center overflow-hidden p-8 group"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.1)_0%,transparent_70%)] opacity-50" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,230,0,0.1)_0%,transparent_70%)] opacity-50" />
 
-            {/* Abstract Map Representation */}
-            <svg
-              viewBox="0 0 200 400"
-              className="w-full h-full max-w-[250px] opacity-30 group-hover:opacity-60 transition-opacity duration-700"
-            >
-              <path
-                d="M100,20 L150,50 L180,120 L160,200 L170,280 L130,350 L80,380 L40,320 L20,220 L30,140 L60,60 Z"
-                fill="none"
-                stroke="var(--color-accent)"
-                strokeWidth="2"
-                strokeDasharray="4 4"
-                className="animate-[dash_20s_linear_infinite]"
-              />
-              <circle cx="100" cy="80" r="4" fill="var(--color-accent)" />
-              <circle cx="140" cy="160" r="3" fill="var(--color-accent)" />
-              <circle cx="60" cy="240" r="5" fill="var(--color-accent)" />
-              <circle cx="120" cy="300" r="3" fill="var(--color-accent)" />
-
-              {/* Connecting lines */}
-              <path
-                d="M100,80 L140,160 L120,300 L60,240 Z"
-                fill="none"
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth="1"
-              />
-            </svg>
-
-            <div className="absolute bottom-6 right-6 font-mono text-xs text-white/30 uppercase tracking-widest">
-              [ Tunisia Map Data ]
+            {/* Dotted Tunisia Map Component */}
+            <div className="relative z-10 w-full max-h-full">
+              <TunisiaMap />
             </div>
           </motion.div>
         </div>

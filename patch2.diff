@@ -1,0 +1,42 @@
+--- src/components/KPIs.tsx
++++ src/components/KPIs.tsx
+@@ -1,5 +1,5 @@
+ import { motion } from "motion/react";
+-import tunisiaMapUrl from "../../Assets/map.svg";
++import TunisiaMap from "./TunisiaMap";
+ 
+ export default function KPIs() {
+   const kpis = [
+@@ -87,17 +87,14 @@
+ 
+           {/* Map Placeholder */}
+           <motion.div
+-            initial={{ opacity: 0, scale: 0.9 }}
+-            whileInView={{ opacity: 1, scale: 1 }}
+-            viewport={{ once: true, margin: "-100px" }}
+-            transition={{ duration: 1 }}
+-            className="relative h-[500px] rounded-3xl glass-panel flex items-center justify-center overflow-hidden group"
++            initial={{ opacity: 0, x: 40 }}
++            whileInView={{ opacity: 1, x: 0 }}
++            viewport={{ once: true, margin: "-50px" }}
++            transition={{ duration: 0.8 }}
++            className="relative h-full min-h-[500px] rounded-3xl glass-panel flex items-center justify-center overflow-hidden p-8 group"
+           >
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.1)_0%,transparent_70%)] opacity-50" />
+ 
+-            <motion.img
+-              src={tunisiaMapUrl}
+-              alt="Carte de la Tunisie"
+-              initial={{ opacity: 0, y: 10 }}
+-              whileInView={{ opacity: 0.35, y: 0 }}
+-              viewport={{ once: true }}
+-              transition={{ duration: 1 }}
+-              className="w-full h-full max-w-[300px] object-contain group-hover:opacity-60 transition-opacity duration-700"
+-            />
++            {/* Dotted Tunisia Map Component */}
++            <div className="relative z-10 w-full max-h-full">
++              <TunisiaMap />
++            </div>
+           </motion.div>
+         </div>
+       </div>

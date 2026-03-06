@@ -1,13 +1,55 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'EYInterstate';
+  src: url('./Font/EYInterstate-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EYInterstate';
+  src: url('./Font/EYInterstate-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'EYInterstate';
+  src: url('./Font/EYInterstate-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EYInterstate';
+  src: url('./Font/EYInterstate-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'EYInterstate';
+  src: url('./Font/EYInterstate-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EYInterstate';
+  src: url('./Font/EYInterstate-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
 
 @theme {
   --font-sans: "Inter", sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "EYInterstate", sans-serif;
   --color-bg: #030303;
   --color-surface: #121212;
-  --color-accent: #00f0ff;
-  --color-accent-glow: rgba(0, 240, 255, 0.4);
+  --color-accent: #FFE600;
+  --color-accent-glow: rgba(255, 230, 0, 0.4);
 }
 
 body {
@@ -52,13 +94,6 @@ h6,
 
 .text-gradient {
   background: linear-gradient(to right, #ffffff, #888888);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-accent {
-  background: linear-gradient(to right, #00f0ff, #7000ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -9,6 +9,7 @@ import Sommaire from "./components/Sommaire";
 import Comprehension from "./components/Comprehension";
 import KPIs from "./components/KPIs";
 import GraphicSection from "./components/GraphicSection";
+import ClientsSection from "./components/ClientsSection";
 import AgendaIntro from "./components/AgendaIntro";
 import AgendaTimeline from "./components/AgendaTimeline";
 import CVs from "./components/CVs";
@@ -24,6 +25,7 @@ export default function App() {
         <Comprehension />
         <KPIs />
         <GraphicSection />
+        <ClientsSection />
         <AgendaIntro />
         <AgendaTimeline />
         <CVs />
