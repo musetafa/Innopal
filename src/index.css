@@ -46,15 +46,16 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-display: "EYInterstate", sans-serif;
-  --color-bg: #030303;
-  --color-surface: #121212;
-  --color-accent: #FFE600;
-  --color-accent-glow: rgba(255, 230, 0, 0.4);
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text-primary: #2E2E38;
+  --color-accent: #7a6400;
+  --color-accent-glow: rgba(122, 100, 0, 0.2);
 }
 
 body {
   background-color: var(--color-bg);
-  color: #ffffff;
+  color: var(--color-text-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -86,15 +87,100 @@ h6,
 }
 
 .glass-panel {
-  background: rgba(18, 18, 18, 0.6);
+  background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(17, 24, 39, 0.12);
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #ffffff, #888888);
+  background: linear-gradient(to right, #2E2E38, #4b5563);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Semantic primary text hue utilities */
+.text-primary {
+  color: #2E2E38 !important;
+}
+
+.hover\:text-primary:hover {
+  color: #2E2E38 !important;
+}
+
+.text-primary-90 {
+  color: rgba(46, 46, 56, 0.9) !important;
+}
+
+.text-primary-80 {
+  color: rgba(46, 46, 56, 0.82) !important;
+}
+
+.text-primary-70 {
+  color: rgba(46, 46, 56, 0.72) !important;
+}
+
+/* Typography: cap weights to Regular across the site (keep Medium for labels) */
+.font-bold,
+.font-semibold,
+.font-extrabold,
+.font-black {
+  font-weight: 400 !important;
+}
+
+.text-primary-60 {
+  color: rgba(46, 46, 56, 0.64) !important;
+}
+
+.text-primary-50 {
+  color: rgba(46, 46, 56, 0.54) !important;
+}
+
+.text-primary-40 {
+  color: rgba(46, 46, 56, 0.46) !important;
+}
+
+.text-primary-30 {
+  color: rgba(46, 46, 56, 0.38) !important;
+}
+
+.text-primary-20 {
+  color: rgba(46, 46, 56, 0.3) !important;
+}
+
+.border-white\/30 {
+  border-color: rgba(17, 24, 39, 0.3) !important;
+}
+
+.border-white\/20 {
+  border-color: rgba(17, 24, 39, 0.22) !important;
+}
+
+.border-white\/10 {
+  border-color: rgba(17, 24, 39, 0.14) !important;
+}
+
+.border-white\/5 {
+  border-color: rgba(17, 24, 39, 0.1) !important;
+}
+
+.bg-white\/10 {
+  background-color: rgba(17, 24, 39, 0.08) !important;
+}
+
+.bg-white\/5 {
+  background-color: rgba(17, 24, 39, 0.05) !important;
+}
+
+.bg-white\/\[0\.03\] {
+  background-color: rgba(17, 24, 39, 0.035) !important;
+}
+
+.bg-white\/\[0\.02\] {
+  background-color: rgba(17, 24, 39, 0.025) !important;
+}
+
+.bg-\[\#0a0a0a\] {
+  background-color: #ffffff !important;
 }

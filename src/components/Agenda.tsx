@@ -23,28 +23,28 @@ const approachPhases = [
 function dayPillClasses(dayId: string) {
   switch (dayId) {
     case "day-1":
-      return "bg-white/10 text-white ring-white/20";
+      return "bg-white/10 text-primary ring-white/20";
     case "day-2":
-      return "bg-white/10 text-white ring-white/20";
+      return "bg-white/10 text-primary ring-white/20";
     default:
-      return "bg-white/10 text-white/80 ring-white/15";
+      return "bg-white/10 text-primary-80 ring-white/15";
   }
 }
 
 function phasePillClasses(phase: string) {
   if (phase.toLowerCase().includes("ouverture")) {
-    return "bg-amber-500/15 text-amber-200 ring-amber-400/20";
+    return "bg-amber-500/15 text-[#dba451] ring-amber-400/20";
   }
   if (phase.toLowerCase().includes("opportunités")) {
-    return "bg-emerald-500/15 text-emerald-200 ring-emerald-400/20";
+    return "bg-emerald-500/15 text-[#347e60] ring-emerald-400/20";
   }
   if (phase.toLowerCase().includes("orientations")) {
-    return "bg-fuchsia-500/15 text-fuchsia-200 ring-fuchsia-400/20";
+    return "bg-fuchsia-500/15 text-[#9629b2] ring-fuchsia-400/20";
   }
   if (phase.toLowerCase().includes("implémentation")) {
     return "bg-indigo-500/15 text-indigo-200 ring-indigo-400/20";
   }
-  return "bg-white/10 text-white/80 ring-white/15";
+  return "bg-white/10 text-primary-80 ring-white/15";
 }
 
 function phaseAccentClasses(phase: string) {
@@ -65,23 +65,36 @@ function phaseAccentClasses(phase: string) {
 
 function phaseTextColor(phase: string) {
   if (phase.toLowerCase().includes("ouverture")) {
-    return "text-amber-400";
+    return "text-[#dba451]";
   }
   if (phase.toLowerCase().includes("opportunités")) {
-    return "text-emerald-400";
+    return "text-[#347e60]";
   }
   if (phase.toLowerCase().includes("orientations")) {
-    return "text-fuchsia-400";
+    return "text-[#9629b2]";
   }
   if (phase.toLowerCase().includes("implémentation")) {
     return "text-indigo-400";
   }
-  return "text-white/20";
+  return "text-primary-20";
+}
+
+function phaseNumberColor(num: string) {
+  if (num === "01") {
+    return "text-[#dba451]";
+  }
+  if (num === "02") {
+    return "text-[#347e60]";
+  }
+  if (num === "03") {
+    return "text-[#9629b2]";
+  }
+  return "text-primary";
 }
 
 export default function AgendaIntro() {
   return (
-    <section id="agenda-intro" className="py-32 relative">
+    <section id="agenda" className="py-32 relative">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -91,7 +104,7 @@ export default function AgendaIntro() {
           className="mb-20"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6">Agenda — Synthèse</h2>
-          <p className="text-white/60 max-w-3xl leading-relaxed">
+          <p className="text-primary-60 max-w-3xl leading-relaxed">
             Une vue d’ensemble des temps forts sur 2 jours (phases, activités et
             durées).
           </p>
@@ -112,13 +125,13 @@ export default function AgendaIntro() {
                 transition={{ duration: 0.5, delay: index * 0.12 }}
                 className="relative p-6 rounded-3xl border border-white/10 bg-white/[0.02]"
               >
-                <div className={`text-5xl font-display font-bold mb-4 ${phaseTextColor(phase.title)}`}>
+                <div className={`text-5xl font-display font-bold mb-4 ${phaseNumberColor(phase.num)}`}>
                   {phase.num}
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
+                <h4 className="text-lg font-semibold text-primary mb-2">
                   {phase.title}
                 </h4>
-                <p className="text-white/60 leading-relaxed text-sm">{phase.desc}</p>
+                <p className="text-primary-60 leading-relaxed text-sm">{phase.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -147,11 +160,11 @@ export default function AgendaIntro() {
                     >
                       {day.title}
                     </span>
-                    <span className="text-sm text-white/60">{day.date}</span>
+                    <span className="text-sm text-primary-60">{day.date}</span>
                   </div>
                 </div>
 
-                <div className="divide-y divide-white/10">
+                <div className="divide-y divide-black/10">
                   {phases.map((phase) => {
                     const activities = day.activities.filter((a) => a.phase === phase);
                     return (
@@ -169,27 +182,27 @@ export default function AgendaIntro() {
                           </span>
                         </div>
 
-                        <div className="overflow-x-auto pb-2">
-                          <table className="w-full min-w-[720px] text-left">
+                        <div className="pb-2">
+                          <table className="w-full text-left">
                             <thead className="sr-only">
                               <tr>
                                 <th>Séquence</th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/10">
+                            <tbody className="divide-y divide-black/10">
                               {activities.map((activity) => (
                                 <tr key={activity.id} className="text-base">
-                                  <td className="px-6 py-4 align-middle text-white/90">
-                                    <div className="flex items-center">
+                                  <td className="px-4 md:px-6 py-4 align-middle text-primary-90">
+                                    <div className="flex flex-wrap items-center gap-1 md:gap-0">
                                       {activity.name.toLowerCase() === "pause" && (
-                                        <Coffee size={16} className="mr-3 text-white/40" />
+                                        <Coffee size={16} className="mr-3 text-primary-40" />
                                       )}
                                       {activity.name.toLowerCase().includes("déjeuner") && (
-                                        <Utensils size={16} className="mr-3 text-white/40" />
+                                        <Utensils size={16} className="mr-3 text-primary-40" />
                                       )}
                                       <span className="font-medium">{activity.name}</span>
                                       {activity.duration && (
-                                        <span className="ml-6 whitespace-nowrap text-white/50">
+                                        <span className="ml-4 md:ml-6 whitespace-nowrap text-primary-50">
                                           {activity.duration}
                                         </span>
                                       )}

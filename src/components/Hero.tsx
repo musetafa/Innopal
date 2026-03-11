@@ -1,10 +1,48 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
+import { useEffect, useRef } from "react";
 import SplineScene from "./SplineScene";
 import Spotlight from "./Spotlight";
+import PulseBeams from "./ui/PulseBeams";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const splineWrapRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const tryAttach = () => {
+      canvasRef.current = splineWrapRef.current?.querySelector("canvas") ?? null;
+      return Boolean(canvasRef.current);
+    };
+
+    if (tryAttach()) return;
+
+    const id = window.setInterval(() => {
+      if (tryAttach()) window.clearInterval(id);
+    }, 250);
+
+    return () => window.clearInterval(id);
+  }, []);
+
+  const forwardPointerMove = (e: ReactMouseEvent<HTMLElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const evtInit = {
+        bubbles: true,
+        cancelable: false,
+        clientX: e.clientX,
+        clientY: e.clientY,
+      };
+
+      canvas.dispatchEvent(new PointerEvent("pointermove", evtInit));
+      canvas.dispatchEvent(new window.MouseEvent("mousemove", evtInit));
+    });
+  };
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -17,7 +55,9 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative md:min-h-screen overflow-x-hidden"
+      onMouseMove={forwardPointerMove}
+      onMouseMoveCapture={forwardPointerMove}
     >
       {/* Spotlight Effect - non-interactive so it doesn't block Spline */}
       <div className="pointer-events-none">
@@ -27,52 +67,63 @@ export default function Hero() {
         />
       </div>
 
-      {/* Text content layer - pointer-events-none on container so Spline gets mouse events, 
-           pointer-events-auto on text elements so they remain selectable */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute top-0 left-0 right-0 z-20 flex flex-col items-center text-center pt-[264px] px-6 pointer-events-none"
-      >
+      <div className="relative z-30 max-w-7xl mx-auto px-6 pt-24 pb-0 md:pb-20 md:min-h-screen grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-0 md:gap-10 overflow-visible">
+        {/* Left: Text */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          style={{ opacity }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="flex flex-col items-center"
+          transition={{ duration: 1, delay: 0.15 }}
+          className="text-left pointer-events-none mt-6 md:mt-0"
         >
-          <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-medium tracking-widest uppercase text-[var(--color-accent)] pointer-events-auto">
-            Session d'immersion IA
-          
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight text-white pointer-events-auto">
-            Immersion IA <br />
-            <span className="text-[var(--color-accent)]">Expérience</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight text-primary pointer-events-auto">
+            Maîtrisez la révolution{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#FFE600] via-[#FF32FF] to-[#32FFFF]">IA</span>
           </h1>
-          <p className="text-lg md:text-xl text-white/60 max-w-2xl font-light leading-relaxed pointer-events-auto">
-            Un voyage transformateur vers l'avenir de l'intelligence artificielle.
-            Découvrez comment nous prévoyons de propulser votre organisation grâce à un apprentissage immersif et une mise en œuvre stratégique.
+          <p className="text-lg md:text-xl text-primary-90 max-w-xl font-light leading-relaxed pointer-events-auto">
+            Une expérience immersive de 2 jours pour définir vos orientations
+            stratégiques 2026-2028.
           </p>
-        </motion.div>
-      </motion.div>
 
-      {/* Spline scene - topmost interactive layer covering entire hero */}
-      <motion.div
-        style={{ y, scale }}
-        className="absolute inset-0 z-0"
-      >
-        <SplineScene
-          scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-          className="w-full h-full"
-        />
-      </motion.div>
+          <PulseBeams />
+        </motion.div>
+
+        {/* Right: Robot */}
+        <motion.div
+          ref={splineWrapRef}
+          style={{ y, scale, transformOrigin: "100% 50%" }}
+          className="relative -mt-24 sm:-mt-16 md:mt-0 h-[500px] md:h-[82vh] w-full overflow-visible"
+        >
+          <div className="absolute inset-0 -right-16 md:-right-24 overflow-visible">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-[115%] h-[115%] [filter:grayscale(1)_saturate(0)_contrast(1.05)_brightness(0.92)]"
+            />
+          </div>
+
+          {/* Overlay only on top of the robot */}
+          <div
+            className="absolute inset-0 -right-16 md:-right-24 bg-gradient-to-t from-[var(--color-bg)] to-transparent z-20 pointer-events-none"
+            style={{
+              height: "min(881px, 70vh)",
+              ["--tw-gradient-from" as any]: "#e8e8e824",
+              ["--tw-gradient-to" as any]: "#ffffff29",
+              mixBlendMode: "hard-light",
+            }}
+          />
+
+          <div className="absolute bottom-0 inset-x-0 -right-16 md:-right-24 h-24 md:h-56 bg-gradient-to-t from-[var(--color-bg)] to-transparent z-30 pointer-events-none" />
+        </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-30"
       >
-        <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">
+        <span className="text-[10px] uppercase tracking-[0.2em] text-primary-40">
           Défiler pour explorer
         </span>
         <motion.div
@@ -80,12 +131,11 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="w-8 h-12 rounded-full border border-white/20 flex justify-center p-2"
         >
-          <motion.div className="w-1 h-2 bg-[var(--color-accent)] rounded-full" />
+          <motion.div className="w-1 h-2 bg-[#2E2E38] rounded-full" />
         </motion.div>
       </motion.div>
 
-      {/* Gradient overlay at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--color-bg)] to-transparent z-0" />
+      
     </section>
   );
 }

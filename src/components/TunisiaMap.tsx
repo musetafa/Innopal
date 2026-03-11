@@ -18,7 +18,7 @@ export default function TunisiaMap() {
             height="10"
             patternUnits="userSpaceOnUse"
           >
-            <circle cx="5" cy="5" r="3" fill="#cccccc" />
+            <text x="5" y="7" textAnchor="middle" dominantBaseline="middle" fontSize="7" fontWeight="bold" fill="#cccccc" fontFamily="sans-serif">+</text>
           </pattern>
         </defs>
         <path
@@ -39,19 +39,19 @@ export default function TunisiaMap() {
       >
         <div className="relative flex items-center justify-center">
           {/* Ping animation effect */}
-          <div className="absolute w-5 h-5 bg-blue-400 rounded-full animate-ping opacity-75"></div>
+          <div className="absolute w-5 h-5 rounded-full animate-ping opacity-75 bg-gradient-to-br from-[#FFE600] via-[#FF32FF] to-[#32FFFF]"></div>
           
           {/* Inner solid circle */}
-          <div className="relative w-3.5 h-3.5 bg-blue-500 rounded-full border-2 border-[var(--color-bg)]"></div>
+          <div className="relative w-3.5 h-3.5 rounded-full border-2 border-[var(--color-bg)] bg-gradient-to-br from-[#FFE600] via-[#FF32FF] to-[#32FFFF]"></div>
           
           {/* Label positioned to the right */}
-          <div className="absolute left-6 w-max bg-black/80 backdrop-blur-md border border-white/10 px-4 py-2 rounded-lg pointer-events-none drop-shadow-xl">
-            <p className="text-white text-sm font-medium leading-tight">
+          <div className="absolute left-6 w-max bg-white/95 backdrop-blur-md border border-black/10 px-4 py-2 rounded-lg pointer-events-none drop-shadow-xl">
+            <p className="text-black text-sm font-medium leading-tight">
               1er Cabinet de conseil<br />
-              <span className="text-white/70">en Tunisie</span>
+              <span className="text-black/60">en Tunisie</span>
             </p>
             {/* Small arrow pointing left */}
-            <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-3 bg-black/80 border-l border-b border-white/10 rotate-45"></div>
+            <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-3 bg-white/95 border-l border-b border-black/10 rotate-45"></div>
           </div>
         </div>
       </motion.div>

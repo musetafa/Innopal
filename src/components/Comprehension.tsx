@@ -17,7 +17,7 @@ export default function Comprehension() {
           </h2>
         </motion.div>
 
-        <div className="space-y-12 text-lg md:text-xl leading-relaxed text-white/70 font-light">
+        <div className="space-y-12 text-lg md:text-xl leading-relaxed text-primary-70 font-light">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,12 +47,12 @@ export default function Comprehension() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="p-8 rounded-2xl border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 relative overflow-hidden mt-16"
+            className="p-8 relative mt-16"
           >
-            <div className="absolute top-0 left-0 w-1 h-full bg-[var(--color-accent)]" />
-            <div className="text-white font-medium">
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#FFE600] via-[#FF32FF] to-[#32FFFF]" />
+            <div className="text-primary font-medium">
               <p className="italic mb-4">Ce contexte exige :</p>
-              <ul className="list-disc pl-6 space-y-2 text-white/90 font-light">
+              <ul className="list-disc pl-6 space-y-2 text-primary-90 font-light">
                 <li>
                   Un alignement des équipes métiers et techniques sur une
                   vision commune de l&apos;IA.

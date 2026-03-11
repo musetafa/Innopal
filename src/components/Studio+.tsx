@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
+import plusIcon from "../../Assets/plus.svg";
 
 export default function GraphicSection() {
   const stats = [
-    { label: "Workshops d’Idéation Gamifiés", value: "200+" },
-    { label: "Entreprises accompagnées", value: "50+" },
-    { label: "Programmes Open Innovation", value: "15+" },
-    { label: "Projets Politique d’Innovation", value: "10+" },
-    { label: "Programmes d’incubation et d’accélération", value: "5+" },
-    { label: "Startups accompagnées", value: "100+" },
+    { label: "Expérience client" },
+    { label: "Transformation marketing" },
+    { label: "Innovation produit & service" },
+    { label: "Transformation des ventes" },
+    { label: "Transformation des services" },
   ];
 
   return (
@@ -20,13 +20,13 @@ export default function GraphicSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <p className="text-xs md:text-sm uppercase tracking-[0.25em] text-white/40 font-medium mb-4">
+          <p className="text-xs md:text-sm uppercase tracking-[0.25em] text-primary-40 font-medium mb-4">
             Notre proposition de valeur
           </p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            EY Studio+ <span className="text-[var(--color-accent)]">Tunisie</span>
+            EY Studio+ Tunisie
           </h2>
-          <p className="text-white/80 text-xl md:text-2xl font-medium max-w-3xl mx-auto mb-8">
+          <p className="text-primary-80 text-xl md:text-2xl font-medium max-w-3xl mx-auto mb-8">
             "Nous ne conseillons pas l’écosystème, nous en faisons partie."
           </p>
         </motion.div>
@@ -37,10 +37,10 @@ export default function GraphicSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="space-y-6 text-white/60 text-lg leading-relaxed"
+            className="space-y-6 text-primary-60 text-lg leading-relaxed"
           >
             <p>
-              <strong className="text-white">EY Studio+</strong> est l’entité de EY dédiée à la conception de services, à l’innovation et à l’expérience client.
+              <strong className="text-primary">EY Studio+</strong> est l’entité de EY dédiée à la conception de services, à l’innovation et à l’expérience client.
             </p>
             <p>
               Elle combine design, technologie et stratégie pour aider les organisations à imaginer, tester et déployer des solutions innovantes centrées sur l’utilisateur.
@@ -49,7 +49,7 @@ export default function GraphicSection() {
               EY Studio+ accompagne les entreprises dans la création de nouveaux produits, services et parcours digitaux, en utilisant des approches telles que le Design Thinking, le prototypage rapide et l’expérimentation.
             </p>
             <div className="pt-6 border-t border-white/10">
-              <p className="text-white/80 italic font-medium">
+              <p className="text-primary-80 italic font-medium">
                 "Nous ne sommes pas au-dessus, ni en dehors. Nous sommes au cœur du mouvement."
               </p>
             </div>
@@ -72,10 +72,10 @@ export default function GraphicSection() {
                 className="glass-panel p-6 rounded-2xl border border-white/5 hover:border-[var(--color-accent)]/30 transition-colors"
               >
                 {/* Visual placeholder for the stat number, since exact numbers aren't in the slide but it's a KPI block */}
-                <div className="text-3xl font-display font-bold text-[var(--color-accent)] mb-2">
-                  ✓
+                <div className="mb-4">
+                  <img src={plusIcon} alt="Plus" className="w-8 h-8 object-contain" />
                 </div>
-                <div className="text-sm text-white/80 leading-snug">
+                <div className="text-sm text-primary-80 leading-snug">
                   {stat.label}
                 </div>
               </motion.div>

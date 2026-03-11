@@ -105,8 +105,8 @@ export default function CVs() {
   };
 
   return (
-    <section id="cvs" className="py-32 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-16 flex items-end justify-between">
+    <section id="cvs" className="pt-16 md:py-32 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -116,12 +116,12 @@ export default function CVs() {
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
             Les experts qui vous accompagnent 
           </h2>
-          <p className="text-white/60 text-lg">
+          <p className="text-primary-60 text-lg">
             Des experts reconnus pour vous accompagner
           </p>
         </motion.div>
 
-        <div className="hidden md:flex gap-4">
+        <div className="flex gap-4 shrink-0">
           <button
             onClick={() => scroll("left")}
             className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -141,11 +141,9 @@ export default function CVs() {
       <div className="w-full">
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden px-6 md:px-0"
+          className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden pl-6 md:pl-[max(1.5rem,calc(50vw-40rem+1.5rem))]"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {/* Spacer to align first item with container */}
-          <div className="hidden md:block min-w-[calc(50vw-40rem+1.5rem)] shrink-0" />
           
           {cvs.map((cv, index) => (
             <motion.div
@@ -177,21 +175,20 @@ export default function CVs() {
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold text-white mb-1">
+                <h3 className="text-2xl font-bold text-primary mb-1">
                   {cv.name}
                 </h3>
                 <div className="text-[var(--color-accent)] font-mono text-sm uppercase tracking-wider mb-2">
                   {cv.role}
                 </div>
-                <div className="text-white/40 text-sm">
+                <div className="text-primary-40 text-sm">
                   {cv.exp} d'expérience
                 </div>
               </div>
             </motion.div>
           ))}
           
-          {/* Spacer to allow last item to scroll fully into view */}
-          <div className="hidden md:block min-w-[calc(50vw-40rem)] shrink-0" />
+          <div className="shrink-0 w-6 md:w-[max(1.5rem,calc(50vw-40rem))]" />
         </div>
       </div>
 
@@ -206,7 +203,7 @@ export default function CVs() {
             onClick={closeModal}
           >
             <button 
-              className="absolute top-6 right-6 md:top-8 md:right-8 text-white/50 hover:text-white transition-colors p-2 rounded-full bg-white/5 hover:bg-white/10 z-50"
+              className="absolute top-6 right-6 md:top-8 md:right-8 text-white hover:text-white transition-colors p-2 rounded-full bg-white/10 hover:bg-white/20 z-50"
               onClick={closeModal}
             >
               <X size={24} />
@@ -247,7 +244,7 @@ export default function CVs() {
                       onClick={prevModalPage}
                       disabled={currentModalPage === 0}
                       className={`absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-md border border-white/10 transition-all ${
-                        currentModalPage === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 hover:border-white/30 text-white"
+                        currentModalPage === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 hover:border-white/30 text-primary"
                       }`}
                     >
                       <ChevronLeft size={24} />
@@ -257,7 +254,7 @@ export default function CVs() {
                       onClick={nextModalPage}
                       disabled={currentModalPage === selectedCV.pages.length - 1}
                       className={`absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-md border border-white/10 transition-all ${
-                        currentModalPage === selectedCV.pages.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 hover:border-white/30 text-white"
+                        currentModalPage === selectedCV.pages.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 hover:border-white/30 text-primary"
                       }`}
                     >
                       <ChevronRight size={24} />

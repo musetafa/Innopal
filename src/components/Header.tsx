@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
-import { Menu } from "lucide-react";
-import eyLogo from "../../Assets/Logos/ey-logo-white.svg";
+import eyLogo from "../../Assets/Logos/ey-logo-dark.svg";
 
 export default function Header() {
   const scrollTo = (id: string) => {
@@ -20,29 +19,24 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center">
         {/* Logos */}
         <div className="flex items-center gap-4">
-          <img src={eyLogo} alt="EY" style={{ height: "calc(var(--spacing) * 12)" }} />
+          <img src={eyLogo} alt="EY" style={{ height: "calc(var(--spacing) * 14)" }} />
         </div>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-8 ml-auto">
+        <nav className="flex items-center gap-6 md:gap-8 ml-auto">
           <button
-            onClick={() => scrollTo("sommaire")}
-            className="text-sm font-medium text-white/70 hover:text-white transition-colors uppercase tracking-widest"
+            onClick={() => scrollTo("agenda")}
+            className="text-sm font-medium text-primary-70 hover:text-primary transition-colors  "
           >
-            Sommaire
+            Agenda
           </button>
           <button
             onClick={() => scrollTo("cvs")}
-            className="text-sm font-medium text-white/70 hover:text-white transition-colors uppercase tracking-widest"
+            className="text-sm font-medium text-primary-70 hover:text-primary transition-colors  "
           >
-            CVs
+            Nos Experts
           </button>
         </nav>
-
-        {/* Mobile Menu */}
-        <button className="md:hidden text-white ml-auto">
-          <Menu size={24} />
-        </button>
       </div>
     </motion.header>
   );

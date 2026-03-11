@@ -26,11 +26,38 @@ function getPhaseColor(phase: string) {
   if (phase.toLowerCase().includes("implémentation")) {
     return "text-indigo-400";
   }
-  return "text-white";
+  return "text-primary";
+}
+
+function getPhaseNodeClasses(phase: string) {
+  if (phase.toLowerCase().includes("ouverture")) {
+    return {
+      ping: "bg-amber-400/45",
+    };
+  }
+  if (phase.toLowerCase().includes("opportunités")) {
+    return {
+      ping: "bg-emerald-400/45",
+    };
+  }
+  if (phase.toLowerCase().includes("orientations")) {
+    return {
+      ping: "bg-fuchsia-400/45",
+    };
+  }
+  if (phase.toLowerCase().includes("implémentation")) {
+    return {
+      ping: "bg-indigo-400/45",
+    };
+  }
+  return {
+    ping: "bg-white/45",
+  };
 }
 
 export default function AgendaTimeline() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const toggleExpand = (id: string, hasDetails: boolean) => {
     if (!hasDetails) return;
@@ -38,7 +65,7 @@ export default function AgendaTimeline() {
   };
 
   return (
-    <section id="agenda" className="py-32 relative bg-[#0a0a0a]">
+    <section id="agendatimeline" className="pt-32 pb-0 md:pb-32 relative bg-[#0a0a0a] overflow-x-hidden">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -48,16 +75,16 @@ export default function AgendaTimeline() {
           className="mb-24 text-center"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Agenda <span className="text-white">Détaillé</span>
+            Agenda <span className="text-primary">Détaillé</span>
           </h2>
-          <p className="text-white/60 text-lg">
+          <p className="text-primary-60 text-lg">
             Un programme intensif sur 2 jours
           </p>
         </motion.div>
 
         <div className="relative">
           {/* Vertical Line */}
-          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-x-1/2" />
+          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-black/35 to-transparent -translate-x-1/2" />
 
           {agendaData.map((day, dayIndex) => (
             <div key={day.id} className="mb-24 relative">
@@ -68,10 +95,10 @@ export default function AgendaTimeline() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="sticky top-24 z-20 flex flex-col items-center mb-16"
               >
-                <div className="bg-[var(--color-bg)] px-6 py-3 rounded-full border border-white/30 text-white font-bold tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center gap-3">
+                <div className="bg-[var(--color-bg)] px-6 py-3 rounded-full border border-white/30 text-primary font-bold tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center gap-3">
                   <span>{day.title}</span>
                   <span className="w-1 h-1 bg-white/50 rounded-full" />
-                  <span className="text-white/70 font-mono font-normal tracking-normal lowercase">{day.date}</span>
+                  <span className="text-primary-70 font-mono font-normal tracking-normal lowercase">{day.date}</span>
                 </div>
               </motion.div>
 
@@ -81,6 +108,7 @@ export default function AgendaTimeline() {
                   const isExpanded = expandedId === activity.id;
                   const isEven = actIndex % 2 === 0;
                   const isPause = activity.name.toLowerCase().includes("pause");
+                  const phaseNodeClasses = getPhaseNodeClasses(activity.phase);
                   const hasDetails = !isPause && Boolean(
                     activity.description ||
                     activity.keyActivities.length > 0 ||
@@ -100,7 +128,10 @@ export default function AgendaTimeline() {
                       }`}
                     >
                       {/* Timeline Node */}
-                      <div className="absolute left-[28px] md:left-1/2 w-4 h-4 rounded-full bg-[var(--color-bg)] border-2 border-white -translate-x-1/2 mt-6 z-10 shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
+                      <div className="absolute left-[28px] md:left-1/2 -translate-x-1/2 mt-6 z-10">
+                        <div className={`absolute inset-0 w-4 h-4 rounded-full animate-ping ${phaseNodeClasses.ping}`} />
+                        <div className="relative w-4 h-4 rounded-full border border-black/25 bg-white shadow-[0_0_12px_rgba(255,255,255,0.7)]" />
+                      </div>
 
                       {/* Content Card */}
                       <div
@@ -108,16 +139,19 @@ export default function AgendaTimeline() {
                       >
                         <div
                           onClick={() => toggleExpand(activity.id, hasDetails)}
-                          className={`glass-panel rounded-2xl p-6 transition-all duration-300 ${
-                            hasDetails ? "cursor-pointer hover:border-white/50" : ""
+                          onMouseEnter={() => hasDetails && setHoveredId(activity.id)}
+                          onMouseLeave={() => setHoveredId(null)}
+                          className={`rounded-2xl p-[1px] transition-all duration-500 bg-[length:200%_100%] bg-[position:0%_0%] ${
+                            hasDetails ? "cursor-pointer" : ""
                           } ${
                             isExpanded
-                              ? "border-white bg-white/[0.05]"
-                              : "border-white/10"
+                              ? "bg-gradient-to-r from-[#FFE600] via-[#FF32FF] to-[#32FFFF]"
+                              : "bg-black/10 hover:bg-gradient-to-r hover:from-[#FFE600] hover:via-[#FF32FF] hover:to-[#32FFFF] hover:bg-[position:100%_0%]"
                           }`}
                         >
-                          <div className="flex items-start justify-between">
-                            <div>
+                          <div className="glass-panel !bg-white rounded-2xl p-6 transition-all duration-300">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0 flex-1">
                               {!activity.name.toLowerCase().includes("pause") && (
                                 <div className={`text-[13px] uppercase tracking-widest mb-2 font-mono ${getPhaseColor(activity.phase)}`}>
                                   {activity.phase}
@@ -125,30 +159,43 @@ export default function AgendaTimeline() {
                               )}
                               <div className="flex items-center">
                                 {activity.name.toLowerCase() === "pause" && (
-                                  <Coffee size={20} className="mr-3 text-white/40" />
+                                  <Coffee size={20} className="mr-3 text-primary-40" />
                                 )}
                                 {activity.name.toLowerCase().includes("déjeuner") && (
-                                  <Utensils size={20} className="mr-3 text-white/40" />
+                                  <Utensils size={20} className="mr-3 text-primary-40" />
                                 )}
-                                <h4 className="text-xl font-bold text-white">
+                                <h4 className="text-lg md:text-xl font-bold text-primary break-words">
                                   {activity.name}
                                 </h4>
                               </div>
                               {activity.duration && (
-                                <div className="flex items-center text-white/50 text-sm font-mono mt-1">
+                                <div className="flex items-center text-primary-50 text-sm font-mono mt-1">
                                   <Clock size={14} className="mr-2" />
                                   {activity.duration}
                                 </div>
                               )}
                             </div>
                             {hasDetails && (
-                              <div className="text-white/30">
+                              <motion.div
+                                className="relative"
+                                animate={{ rotate: hoveredId === activity.id ? 360 : 0 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                              >
+                                <svg width="0" height="0" className="absolute">
+                                  <defs>
+                                    <linearGradient id="chevron-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                      <stop offset="0%" stopColor="#FFE600" />
+                                      <stop offset="50%" stopColor="#FF32FF" />
+                                      <stop offset="100%" stopColor="#32FFFF" />
+                                    </linearGradient>
+                                  </defs>
+                                </svg>
                                 {isExpanded ? (
-                                  <ChevronUp size={20} />
+                                  <ChevronUp size={20} stroke="url(#chevron-gradient)" />
                                 ) : (
-                                  <ChevronDown size={20} />
+                                  <ChevronDown size={20} stroke="url(#chevron-gradient)" />
                                 )}
-                              </div>
+                              </motion.div>
                             )}
                           </div>
 
@@ -165,16 +212,16 @@ export default function AgendaTimeline() {
                                 className="overflow-hidden"
                               >
                                 <div className="pt-6 border-t border-white/10 mt-4 space-y-6">
-                                  <p className="text-white/70 leading-relaxed text-sm">
+                                  <p className="text-primary-70 leading-relaxed text-sm">
                                     {activity.description}
                                   </p>
 
                                   <div className="grid grid-cols-1 gap-6">
                                     <div>
-                                      <h5 className="flex items-center text-sm font-bold text-white mb-3 uppercase tracking-wider">
+                                      <h5 className="flex items-center text-sm font-bold text-primary mb-3 uppercase tracking-wider">
                                         <Zap
                                           size={16}
-                                          className="mr-2 text-white"
+                                          className="mr-2 text-primary"
                                         />
                                         Activités clés
                                       </h5>
@@ -183,9 +230,9 @@ export default function AgendaTimeline() {
                                           (item, i) => (
                                             <li
                                               key={i}
-                                              className="flex items-start text-sm text-white/60"
+                                              className="flex items-start text-sm text-primary-60"
                                             >
-                                              <span className="mr-2 text-white mt-1">
+                                              <span className="mr-2 text-primary mt-1">
                                                 •
                                               </span>
                                               {item}
@@ -197,7 +244,7 @@ export default function AgendaTimeline() {
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                       <div>
-                                        <h5 className="flex items-center text-sm font-bold text-white mb-3 uppercase tracking-wider">
+                                        <h5 className="flex items-center text-sm font-bold text-primary mb-3 uppercase tracking-wider">
                                           <CheckCircle2
                                             size={16}
                                             className="mr-2 text-green-400"
@@ -208,7 +255,7 @@ export default function AgendaTimeline() {
                                           {activity.results.map((item, i) => (
                                             <li
                                               key={i}
-                                              className="flex items-start text-sm text-white/60"
+                                              className="flex items-start text-sm text-primary-60"
                                             >
                                               <span className="mr-2 text-green-400 mt-1">
                                                 •
@@ -220,7 +267,7 @@ export default function AgendaTimeline() {
                                       </div>
 
                                       <div>
-                                        <h5 className="flex items-center text-sm font-bold text-white mb-3 uppercase tracking-wider">
+                                        <h5 className="flex items-center text-sm font-bold text-primary mb-3 uppercase tracking-wider">
                                           <Target
                                             size={16}
                                             className="mr-2 text-purple-400"
@@ -231,7 +278,7 @@ export default function AgendaTimeline() {
                                           {activity.impacts.map((item, i) => (
                                             <li
                                               key={i}
-                                              className="flex items-start text-sm text-white/60"
+                                              className="flex items-start text-sm text-primary-60"
                                             >
                                               <span className="mr-2 text-purple-400 mt-1">
                                                 •
@@ -265,6 +312,7 @@ export default function AgendaTimeline() {
                               </motion.div>
                             )}
                           </AnimatePresence>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
