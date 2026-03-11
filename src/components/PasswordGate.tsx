@@ -39,7 +39,7 @@ export default function PasswordGate({ children }: { children: ReactNode }) {
       >
         <div className="text-center">
           <h1 className="text-3xl font-bold text-primary mb-2">
-            EY Studio<span className="text-transparent bg-clip-text bg-gradient-to-br from-[#FFE600] via-[#FF32FF] to-[#32FFFF]">+</span>
+            EY Studio<span className="text-primary">+</span>
           </h1>
           <p className="text-primary-50 text-sm">
             Veuillez entrer le mot de passe pour accéder au site
