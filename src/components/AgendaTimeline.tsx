@@ -300,7 +300,7 @@ export default function AgendaTimeline() {
                                           className="relative rounded-xl overflow-hidden border border-white/10 shadow-xl transition-transform duration-500 hover:scale-[1.02] w-full"
                                         >
                                           <img
-                                            src={`../../Assets/Agenda/${imgSrc}`}
+                                            src={`/Assets/Agenda/${imgSrc}`}
                                             alt={`${activity.name} preview ${i + 1}`}
                                             className="w-full h-auto object-contain rounded-xl"
                                           />

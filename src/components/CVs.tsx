@@ -219,7 +219,7 @@ export default function CVs() {
               {/* Image Container */}
               <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#111] border border-white/10 flex items-center justify-center flex-col">
                 <img
-                  src={`../../Assets/resumes/${selectedCV.pages[currentModalPage]}`}
+                  src={`/Assets/resumes/${selectedCV.pages[currentModalPage]}`}
                   alt={`CV ${selectedCV.name} page ${currentModalPage + 1}`}
                   className="w-full h-full object-contain"
                 />
@@ -227,7 +227,7 @@ export default function CVs() {
                 {/* Download Button */}
                 {selectedCV.pdf && (
                   <a
-                    href={`../../Assets/resumes/${selectedCV.pdf}`}
+                    href={`/Assets/resumes/${selectedCV.pdf}`}
                     download
                     className="absolute top-6 left-6 z-50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-4 py-2 rounded-full font-medium flex items-center gap-2 border border-white/20 transition-all shadow-lg"
                     onClick={(e) => e.stopPropagation()}
