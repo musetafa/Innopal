@@ -67,7 +67,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-30 max-w-7xl mx-auto px-6 pt-24 pb-0 md:pb-20 md:min-h-screen grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-0 md:gap-10 overflow-visible">
+      <div className="relative z-30 max-w-7xl mx-auto px-6 pt-[200px] pb-0 md:pb-20 md:min-h-screen grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-0 md:gap-10 overflow-visible">
         {/* Left: Text */}
         <motion.div
           style={{ opacity }}
