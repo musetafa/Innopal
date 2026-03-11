@@ -13,9 +13,11 @@ import ClientsSection from "./components/ClientsSection";
 import AgendaIntro from "./components/Agenda";
 import AgendaTimeline from "./components/AgendaTimeline";
 import CVs from "./components/CVs";
+import PasswordGate from "./components/PasswordGate";
 
 export default function App() {
   return (
+    <PasswordGate>
     <div className="min-h-screen bg-[var(--color-bg)] text-primary selection:bg-blue-500 selection:text-white">
       <Header />
 
@@ -35,5 +37,6 @@ export default function App() {
         <p>© 2026 AI Immersion Experience. Tous droits réservés.</p>
       </footer>
     </div>
+    </PasswordGate>
   );
 }
