@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { IconoirArrowRight } from "@ey-xd/motif-icon";
+import MotifIcon from "./MotifIcon";
 
 const sections = [
   {
@@ -72,7 +73,7 @@ export default function Sommaire() {
                 </div>
 
                 <div className="absolute bottom-8 right-8 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
-                  <ArrowRight size={12} strokeWidth={2} />
+                  <MotifIcon icon={IconoirArrowRight} size="12" />
                 </div>
               </button>
             </motion.div>

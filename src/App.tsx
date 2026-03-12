@@ -14,6 +14,7 @@ import AgendaIntro from "./components/Agenda";
 import AgendaTimeline from "./components/AgendaTimeline";
 import CVs from "./components/CVs";
 import PasswordGate from "./components/PasswordGate";
+import ContactSection from "./components/ContactSection";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <AgendaIntro />
         <AgendaTimeline />
         <CVs />
+        <ContactSection />
       </main>
 
       <footer className="py-5 md:py-12 border-t border-black/10 text-center text-primary-50 text-sm font-mono uppercase tracking-widest">

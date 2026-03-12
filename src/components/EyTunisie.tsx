@@ -45,16 +45,16 @@ export default function KPIs() {
               </p>
               <p>
                 EY Tunisie soutient les éditeurs de logiciels et les acteurs des
-                services financiers dans le développement, l’évolution et la
+                organisations dans le développement, l’évolution et la
                 gouvernance de leurs plateformes technologiques, en Tunisie et
                 au-delà, sur l’Afrique subsaharienne francophone et le Moyen-Orient.
               </p>
               <p>
                 Nous disposons d’une connaissance approfondie et opérationnelle
-                dans l’édition de solutions destinées au secteur financier,
-                portée par des experts dédiés et appuyée par des références
-                solides issues de projets de transformation d’envergure menés
-                avec les principaux acteurs du secteur.
+                dans l’édition de solutions digitales, la modernisation des
+                plateformes et l’intégration de l’IA, portée par des experts
+                dédiés et appuyée par des références solides issues de projets
+                de transformation d’envergure.
               </p>
               <p>
                 Plus de 500 missions sont réalisées chaque année, auprès de plus
@@ -62,15 +62,15 @@ export default function KPIs() {
               </p>
               <p>
                 Nos références couvrent les principaux enjeux de l’édition
-                logicielle financière : performance, digitalisation, UX, data,
-                conformité et technologies.
+                logicielle : performance, digitalisation, UX, data, conformité
+                et technologies.
               </p>
               <p>
                 Ces références ont permis de construire une expertise reconnue,
                 nourrie par une compréhension fine des réalités terrain propres
-                à l’édition de solutions pour le secteur financier, et orientée
-                vers la résolution de problématiques business concrètes et à
-                fort impact.
+                à l’édition de solutions digitales et à l’industrialisation de
+                l’IA, et orientée vers la résolution de problématiques business
+                concrètes et à fort impact.
               </p>
             </div>
 
@@ -102,7 +102,7 @@ export default function KPIs() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
-            className="relative h-full min-h-[500px] rounded-3xl glass-panel flex items-center justify-center overflow-hidden group"
+            className="relative h-full min-h-[500px] rounded-lg glass-panel flex items-center justify-center overflow-hidden group"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,230,0,0.1)_0%,transparent_70%)] opacity-50" />
 

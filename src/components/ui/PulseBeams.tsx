@@ -211,7 +211,7 @@ const SVGs = () => (
 export default function PulseBeams() {
   return (
     <div className="relative w-full max-w-2xl h-[10rem] sm:h-[14rem] md:h-[22rem] overflow-hidden pointer-events-auto">
-      <div className="relative inline-flex items-center justify-center mt-[24px]">
+      <div className="relative inline-flex items-center justify-center mt-[24px] gap-3">
         <button
           onClick={() => document.getElementById("agenda")?.scrollIntoView({ behavior: "smooth" })}
           className="relative z-40 no-underline group cursor-pointer rounded-[4px] p-px text-xs font-semibold leading-6 inline-block"
@@ -222,6 +222,16 @@ export default function PulseBeams() {
           <div className="relative flex justify-center items-center text-center w-auto h-[55px] rounded-[4px] bg-[#2E2E38] ring-1 ring-white/10 px-6">
             <span className="text-[16px] text-white">
               Découvrir l'agenda
+            </span>
+          </div>
+        </button>
+        <button
+          onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+          className="relative z-40 no-underline group cursor-pointer rounded-[4px] p-px text-xs font-semibold leading-6 inline-block"
+        >
+          <div className="relative flex justify-center items-center text-center w-auto h-[55px] rounded-[4px] bg-transparent ring-1 ring-[#2E2E38]/30 px-6 group-hover:ring-[#2E2E38]/60 transition-all">
+            <span className="text-[16px] text-[#2E2E38]">
+              Demander plus d'info
             </span>
           </div>
         </button>

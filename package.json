@@ -11,9 +11,13 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@ey-xd/motif-components": "^11.1.1",
+    "@ey-xd/motif-icon": "^3.4.0",
+    "@ey-xd/motif-wc-react": "^11.1.1",
     "@google/genai": "^1.29.0",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.61",
+    "@supabase/supabase-js": "^2.99.1",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
     "better-sqlite3": "^12.4.1",
@@ -21,7 +25,6 @@
     "dotted-map": "^3.1.0",
     "express": "^4.21.2",
     "lucide": "^0.577.0",
-    "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",

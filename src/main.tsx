@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "@ey-xd/motif-components/dist/motif-components/motif-components.css";
 import App from "./App.tsx";
 import "./index.css";
 

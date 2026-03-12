@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { Coffee, Utensils } from "lucide-react";
+import { IconoirCoffeeCup, IconoirOrganicFood } from "@ey-xd/motif-icon";
+import MotifIcon from "./MotifIcon";
 import { agendaData } from "../data/agenda";
 
 const approachPhases = [
@@ -123,7 +124,7 @@ export default function AgendaIntro() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="relative p-6 rounded-3xl border border-white/10 bg-white/[0.02]"
+                className="relative p-6 rounded-lg border border-white/10 bg-white/[0.02]"
               >
                 <div className={`text-5xl font-display font-bold mb-4 ${phaseNumberColor(phase.num)}`}>
                   {phase.num}
@@ -149,7 +150,7 @@ export default function AgendaIntro() {
             return (
               <div
                 key={day.id}
-                className="rounded-3xl border border-white/10 bg-white/[0.02] overflow-hidden"
+                className="rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden"
               >
                 <div className="flex items-center justify-between px-6 py-5 bg-white/[0.03]">
                   <div className="flex items-center gap-3">
@@ -195,10 +196,10 @@ export default function AgendaIntro() {
                                   <td className="px-4 md:px-6 py-4 align-middle text-primary-90">
                                     <div className="flex flex-wrap items-center gap-1 md:gap-0">
                                       {activity.name.toLowerCase() === "pause" && (
-                                        <Coffee size={16} className="mr-3 text-primary-40" />
+                                        <MotifIcon icon={IconoirCoffeeCup} size="16" fill="#656579" className="mr-3" />
                                       )}
                                       {activity.name.toLowerCase().includes("déjeuner") && (
-                                        <Utensils size={16} className="mr-3 text-primary-40" />
+                                        <MotifIcon icon={IconoirOrganicFood} size="16" fill="#656579" className="mr-3" />
                                       )}
                                       <span className="font-medium">{activity.name}</span>
                                       {activity.duration && (

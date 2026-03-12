@@ -1,5 +1,6 @@
 import React from "react";
-import { Plus } from "lucide-react";
+import { IconoirPlus } from "@ey-xd/motif-icon";
+import MotifIcon from "../MotifIcon";
 
 type Logo = {
   src: string;
@@ -50,27 +51,39 @@ export function LogoCloud({ className = "", logos, ...props }: LogoCloudProps) {
             logo={logo}
           >
             {isFirst && (
-              <Plus
-                className="-right-[12.5px] -bottom-[12.5px] absolute z-10 size-6 text-primary-40"
-                strokeWidth={1}
+              <MotifIcon
+                icon={IconoirPlus}
+                size="24"
+                fill="#656579"
+                strokeWidth="1"
+                className="-right-[12.5px] -bottom-[12.5px] absolute z-10"
               />
             )}
             {isThird && (
               <>
-                <Plus
-                  className="-right-[12.5px] -bottom-[12.5px] absolute z-10 size-6 text-primary-40"
-                  strokeWidth={1}
+                <MotifIcon
+                  icon={IconoirPlus}
+                  size="24"
+                  fill="#656579"
+                  strokeWidth="1"
+                  className="-right-[12.5px] -bottom-[12.5px] absolute z-10"
                 />
-                <Plus
-                  className="-bottom-[12.5px] -left-[12.5px] absolute z-10 hidden size-6 md:block text-primary-40"
-                  strokeWidth={1}
+                <MotifIcon
+                  icon={IconoirPlus}
+                  size="24"
+                  fill="#656579"
+                  strokeWidth="1"
+                  className="-bottom-[12.5px] -left-[12.5px] absolute z-10 hidden md:inline-flex"
                 />
               </>
             )}
             {isFifth && (
-              <Plus
-                className="-right-[12.5px] -bottom-[12.5px] md:-left-[12.5px] absolute z-10 size-6 md:hidden text-primary-40"
-                strokeWidth={1}
+              <MotifIcon
+                icon={IconoirPlus}
+                size="24"
+                fill="#656579"
+                strokeWidth="1"
+                className="-right-[12.5px] -bottom-[12.5px] md:-left-[12.5px] absolute z-10 md:hidden"
               />
             )}
           </LogoCard>

@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { Download, ChevronRight, ChevronLeft, X } from "lucide-react";
+import { IconoirDownload, IconoirNavArrowRight, IconoirNavArrowLeft, IconoirXmark } from "@ey-xd/motif-icon";
+import MotifIcon from "./MotifIcon";
 
 import pic1 from "../../Assets/Profile pic-cv-01.png";
 import pic2 from "../../Assets/Profile pic-cv-02.png";
@@ -126,13 +127,13 @@ export default function CVs() {
             onClick={() => scroll("left")}
             className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
           >
-            <ChevronLeft size={24} />
+            <MotifIcon icon={IconoirNavArrowLeft} size="24" />
           </button>
           <button
             onClick={() => scroll("right")}
             className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
           >
-            <ChevronRight size={24} />
+            <MotifIcon icon={IconoirNavArrowRight} size="24" />
           </button>
         </div>
       </div>
@@ -206,7 +207,7 @@ export default function CVs() {
               className="absolute top-6 right-6 md:top-8 md:right-8 text-white hover:text-white transition-colors p-2 rounded-full bg-white/10 hover:bg-white/20 z-50"
               onClick={closeModal}
             >
-              <X size={24} />
+              <MotifIcon icon={IconoirXmark} size="24" />
             </button>
 
             <motion.div
@@ -232,7 +233,7 @@ export default function CVs() {
                     className="absolute top-6 left-6 z-50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md px-4 py-2 rounded-full font-medium flex items-center gap-2 border border-white/20 transition-all shadow-lg"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <Download size={18} />
+                    <MotifIcon icon={IconoirDownload} size="18" />
                     <span className="hidden sm:inline">Télécharger (PDF)</span>
                   </a>
                 )}
@@ -247,7 +248,7 @@ export default function CVs() {
                         currentModalPage === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 hover:border-white/30 text-primary"
                       }`}
                     >
-                      <ChevronLeft size={24} />
+                      <MotifIcon icon={IconoirNavArrowLeft} size="24" />
                     </button>
                     
                     <button
@@ -257,7 +258,7 @@ export default function CVs() {
                         currentModalPage === selectedCV.pages.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 hover:border-white/30 text-primary"
                       }`}
                     >
-                      <ChevronRight size={24} />
+                      <MotifIcon icon={IconoirNavArrowRight} size="24" />
                     </button>
 
                     {/* Page Indicator */}

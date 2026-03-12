@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  ChevronDown,
-  ChevronUp,
-  Clock,
-  Target,
-  Zap,
-  CheckCircle2,
-  Image as ImageIcon,
-  Coffee,
-  Utensils,
-} from "lucide-react";
+  IconoirClock,
+  IconoirBrightStar,
+  IconoirFlash,
+  IconoirCheckCircle,
+  IconoirCoffeeCup,
+  IconoirOrganicFood,
+} from "@ey-xd/motif-icon";
+import MotifIcon from "./MotifIcon";
 import { agendaData, Activity } from "../data/agenda";
 
 function getPhaseColor(phase: string) {
@@ -95,7 +93,7 @@ export default function AgendaTimeline() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="sticky top-24 z-20 flex flex-col items-center mb-16"
               >
-                <div className="bg-[var(--color-bg)] px-6 py-3 rounded-full border border-white/30 text-primary font-bold tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center gap-3">
+                <div className="bg-[var(--color-bg)] px-6 py-3 rounded-full border border-white/30 text-primary font-bold tracking-widest uppercase text-[15px] shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center gap-3">
                   <span>{day.title}</span>
                   <span className="w-1 h-1 bg-white/50 rounded-full" />
                   <span className="text-primary-70 font-mono font-normal tracking-normal lowercase">{day.date}</span>
@@ -153,24 +151,24 @@ export default function AgendaTimeline() {
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0 flex-1">
                               {!activity.name.toLowerCase().includes("pause") && (
-                                <div className={`text-[13px] uppercase tracking-widest mb-2 font-mono ${getPhaseColor(activity.phase)}`}>
+                                <div className={`text-[15px] uppercase tracking-widest mb-2 font-mono ${getPhaseColor(activity.phase)}`}>
                                   {activity.phase}
                                 </div>
                               )}
                               <div className="flex items-center">
                                 {activity.name.toLowerCase() === "pause" && (
-                                  <Coffee size={20} className="mr-3 text-primary-40" />
+                                  <MotifIcon icon={IconoirCoffeeCup} size="20" fill="#656579" className="mr-3" />
                                 )}
                                 {activity.name.toLowerCase().includes("déjeuner") && (
-                                  <Utensils size={20} className="mr-3 text-primary-40" />
+                                  <MotifIcon icon={IconoirOrganicFood} size="20" fill="#656579" className="mr-3" />
                                 )}
                                 <h4 className="text-lg md:text-xl font-bold text-primary break-words">
                                   {activity.name}
                                 </h4>
                               </div>
                               {activity.duration && (
-                                <div className="flex items-center text-primary-50 text-sm font-mono mt-1">
-                                  <Clock size={14} className="mr-2" />
+                                <div className="flex items-center text-primary-50 text-[15px] font-mono mt-1">
+                                  <MotifIcon icon={IconoirClock} size="14" className="mr-2" />
                                   {activity.duration}
                                 </div>
                               )}
@@ -191,9 +189,13 @@ export default function AgendaTimeline() {
                                   </defs>
                                 </svg>
                                 {isExpanded ? (
-                                  <ChevronUp size={20} stroke="url(#chevron-gradient)" />
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 15L12 9L18 15" stroke="url(#chevron-gradient)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                  </svg>
                                 ) : (
-                                  <ChevronDown size={20} stroke="url(#chevron-gradient)" />
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 9L12 15L18 9" stroke="url(#chevron-gradient)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                  </svg>
                                 )}
                               </motion.div>
                             )}
@@ -212,17 +214,15 @@ export default function AgendaTimeline() {
                                 className="overflow-hidden"
                               >
                                 <div className="pt-6 border-t border-white/10 mt-4 space-y-6">
-                                  <p className="text-primary-70 leading-relaxed text-sm">
+                                  <p className="text-primary-70 leading-relaxed text-[15px]">
                                     {activity.description}
                                   </p>
 
                                   <div className="grid grid-cols-1 gap-6">
+                                    {activity.keyActivities.length > 0 && (
                                     <div>
-                                      <h5 className="flex items-center text-sm font-bold text-primary mb-3 uppercase tracking-wider">
-                                        <Zap
-                                          size={16}
-                                          className="mr-2 text-primary"
-                                        />
+                                      <h5 className="flex items-center text-[15px] font-bold text-primary mb-3 uppercase tracking-wider">
+                                        <MotifIcon icon={IconoirFlash} size="16" fill="#ffe600" className="mr-2" />
                                         Activités clés
                                       </h5>
                                       <ul className="space-y-2">
@@ -230,9 +230,9 @@ export default function AgendaTimeline() {
                                           (item, i) => (
                                             <li
                                               key={i}
-                                              className="flex items-start text-sm text-primary-60"
+                                              className="flex items-start text-[15px] text-primary-60"
                                             >
-                                              <span className="mr-2 text-primary mt-1">
+                                              <span className="mr-2 text-primary mt-[3px]">
                                                 •
                                               </span>
                                               {item}
@@ -241,23 +241,23 @@ export default function AgendaTimeline() {
                                         )}
                                       </ul>
                                     </div>
+                                    )}
 
+                                    {(activity.results.length > 0 || activity.impacts.length > 0) && (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                      {activity.results.length > 0 && (
                                       <div>
-                                        <h5 className="flex items-center text-sm font-bold text-primary mb-3 uppercase tracking-wider">
-                                          <CheckCircle2
-                                            size={16}
-                                            className="mr-2 text-green-400"
-                                          />
+                                        <h5 className="flex items-center text-[15px] font-bold text-primary mb-3 uppercase tracking-wider">
+                                          <MotifIcon icon={IconoirCheckCircle} size="16" fill="#4ade80" className="mr-2" />
                                           Résultats
                                         </h5>
                                         <ul className="space-y-2">
                                           {activity.results.map((item, i) => (
                                             <li
                                               key={i}
-                                              className="flex items-start text-sm text-primary-60"
+                                              className="flex items-start text-[15px] text-primary-60"
                                             >
-                                              <span className="mr-2 text-green-400 mt-1">
+                                              <span className="mr-2 text-green-400 mt-[3px]">
                                                 •
                                               </span>
                                               {item}
@@ -265,22 +265,21 @@ export default function AgendaTimeline() {
                                           ))}
                                         </ul>
                                       </div>
+                                      )}
 
+                                      {activity.impacts.length > 0 && (
                                       <div>
-                                        <h5 className="flex items-center text-sm font-bold text-primary mb-3 uppercase tracking-wider">
-                                          <Target
-                                            size={16}
-                                            className="mr-2 text-purple-400"
-                                          />
+                                        <h5 className="flex items-center text-[15px] font-bold text-primary mb-3 uppercase tracking-wider">
+                                          <MotifIcon icon={IconoirBrightStar} size="16" fill="#c084fc" className="mr-2" />
                                           Impacts
                                         </h5>
                                         <ul className="space-y-2">
                                           {activity.impacts.map((item, i) => (
                                             <li
                                               key={i}
-                                              className="flex items-start text-sm text-primary-60"
+                                              className="flex items-start text-[15px] text-primary-60"
                                             >
-                                              <span className="mr-2 text-purple-400 mt-1">
+                                              <span className="mr-2 text-purple-400 mt-[3px]">
                                                 •
                                               </span>
                                               {item}
@@ -288,7 +287,9 @@ export default function AgendaTimeline() {
                                           ))}
                                         </ul>
                                       </div>
+                                      )}
                                     </div>
+                                    )}
                                   </div>
 
                                   {/* Actual Images (if any) */}

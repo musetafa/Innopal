@@ -19,20 +19,20 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center">
         {/* Logos */}
         <div className="flex items-center gap-4">
-          <img src={eyLogo} alt="EY" style={{ height: "calc(var(--spacing) * 14)" }} />
+          <img src={eyLogo} alt="EY" style={{ height: "calc(var(--spacing) * 13)" }} />
         </div>
 
         {/* Navigation */}
         <nav className="flex items-center gap-6 md:gap-8 ml-auto">
           <button
             onClick={() => scrollTo("agenda")}
-            className="text-sm font-medium text-primary-70 hover:text-primary transition-colors  "
+            className="text-[15px] font-medium text-primary-70 hover:text-primary transition-colors"
           >
             Agenda
           </button>
           <button
             onClick={() => scrollTo("cvs")}
-            className="text-sm font-medium text-primary-70 hover:text-primary transition-colors  "
+            className="text-[15px] font-medium text-primary-70 hover:text-primary transition-colors"
           >
             Nos Experts
           </button>

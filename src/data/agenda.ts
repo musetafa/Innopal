@@ -139,10 +139,10 @@ export const agendaData: Day[] = [
       {
         id: "d1-a3c",
         phase: "Comprendre, analyser et structurer les opportunités IA",
-        name: "Keynotes — Au Cœur de la Finance Digitale : Vision, Tendances et Ruptures",
+        name: "Keynotes - IA & Transformation Digitale : Vision, Tendances et Ruptures.",
         duration: "45 min",
         description:
-          "Partager une vision, des tendances et des ruptures clés pour cadrer les opportunités IA dans le secteur financier.",
+          "Partager une vision, des tendances et des ruptures clés pour cadrer les opportunités IA pour votre organisation.",
         keyActivities: ["Keynote et échanges."],
         results: ["Alignement sur les tendances et enjeux du marché."],
         impacts: ["Cadre commun pour la suite des ateliers."],
