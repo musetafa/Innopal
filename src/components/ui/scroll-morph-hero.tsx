@@ -348,7 +348,7 @@ export default function ScrollMorphHero() {
 
       {/* Arc Content */}
       <motion.div
-        className="absolute z-10 text-center w-full top-8 mt-[15vh] pointer-events-none px-4"
+        className="absolute z-10 text-center w-full top-8 mt-[9vh] md:mt-[15vh] pointer-events-none px-4"
         style={{ opacity: contentOpacity, y: contentY }}
       >
         <h2 className="text-4xl md:text-6xl font-medium mb-4 text-primary">
